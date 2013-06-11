@@ -18,7 +18,8 @@ namespace Microsoft.AspNet.SignalR.Client.Silverlight.Sample
             // Set the data context of the listbox control to the sample data
             DataContext = App.ViewModel;
 
-            var connection = new Connection("http://localhost:40476/raw-connection");
+            //var connection = new Connection("http://localhost:40476/raw-connection");
+            var connection = new Connection("http://signalr01.cloudapp.net:81/");
 
             connection.Received += data =>
             {
@@ -35,6 +36,7 @@ namespace Microsoft.AspNet.SignalR.Client.Silverlight.Sample
                     connection.Trace(TraceLevels.Events, ex.ToString());
                     var aggEx = (AggregateException)ex;
                     App.ViewModel.Items.Add(aggEx.InnerExceptions[0].Message);
+                    connection.Trace(TraceLevels.Events, aggEx.InnerExceptions[0].Message);
                 });
             };
 
